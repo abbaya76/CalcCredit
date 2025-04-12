@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글로벌 스마트 페이먼트 계산기</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>글로벌 스마트 페이먼트 계산기</h1>
+        <div class="calculator">
+            <div class="input-group">
+                <label for="currency-type">통화 선택:</label>
+                <select id="currency-type">
+                    <option value="JPY">일본 엔화(¥)</option>
+                    <option value="USD">미국 달러($)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="amount">금액:</label>
+                <input type="number" id="amount" placeholder="금액을 입력하세요">
+            </div>
+            <div class="input-group">
+                <label for="card-type">카드 종류:</label>
+                <select id="card-type">
+                    <option value="woori">우리카드</option>
+                    <option value="shinhan">신한카드</option>
+                    <option value="kb">국민카드</option>
+                    <option value="samsung">삼성카드</option>
+                    <option value="hyundai">현대카드</option>
+                </select>
+            </div>
+            <div class="current-rates">
+                <p>현재 환율: <span id="current-jpy-rate">로딩 중...</span> | <span id="current-usd-rate">로딩 중...</span></p>
+                <p class="rate-time">업데이트: <span id="rate-update-time">로딩 중...</span></p>
+            </div>
+            <button id="calculate-btn">계산하기</button>
+            
+            <div class="result" id="result-container">
+                <h2>결제 상세 내역</h2>
+                <div class="result-row">
+                    <span>외화 금액:</span>
+                    <span id="original-amount">0</span>
+                </div>
+                <div class="result-row">
+                    <span>적용 환율:</span>
+                    <span id="exchange-rate">0 원</span>
+                </div>
+                <div class="result-row">
+                    <span>원화 환산 금액:</span>
+                    <span id="krw-amount">0 원</span>
+                </div>
+                <div class="result-row">
+                    <span>카드 수수료:</span>
+                    <span id="card-fee">0 원</span>
+                </div>
+                <div class="result-row">
+                    <span>해외 이용 수수료:</span>
+                    <span id="foreign-fee">0 원</span>
+                </div>
+                <div class="result-row total">
+                    <span>최종 결제 금액:</span>
+                    <span id="total-amount">0 원</span>
+                </div>
+            </div>
+        </div>
+        <div class="disclaimer">
+            <p>※ 이 계산기는 참고용으로만 사용하시기 바랍니다. 실제 결제 금액은 결제일의 환율, 카드사 정책 등에 따라 달라질 수 있습니다.</p>
+            <p>※ 환율 정보는 실시간으로 갱신됩니다.</p>
+            <p class="coming-soon">※ 본 서비스는 2025년부터 정식 서비스될 예정입니다.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 글로벌 스마트 페이먼트 계산기 | BETA 서비스</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

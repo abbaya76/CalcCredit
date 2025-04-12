@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin: 30px 0;
+    color: #e74c3c;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.calculator {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.current-rates {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-left: 4px solid #2ecc71;
+    font-size: 14px;
+}
+
+.current-rates span {
+    font-weight: bold;
+    color: #2ecc71;
+}
+
+.rate-time {
+    font-size: 12px;
+    color: #777;
+    margin-top: 5px;
+}
+
+#rate-update-time {
+    color: #777;
+    font-style: italic;
+}
+
+button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #c0392b;
+}
+
+.result {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border-left: 4px solid #e74c3c;
+}
+
+.result h2 {
+    margin-bottom: 15px;
+    color: #e74c3c;
+    font-size: 18px;
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.total {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px solid #ddd;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.disclaimer {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #777;
+}
+
+.coming-soon {
+    margin-top: 10px;
+    color: #e74c3c;
+    font-weight: bold;
+    border-top: 1px dashed #ddd;
+    padding-top: 10px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    color: #777;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .calculator {
+        padding: 20px;
+    }
+} 
