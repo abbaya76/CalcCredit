@@ -10,8 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cardFeeEl = document.getElementById('card-fee');
     const foreignFeeEl = document.getElementById('foreign-fee');
     const totalAmountEl = document.getElementById('total-amount');
-    const currentJpyRateEl = document.getElementById('current-jpy-rate');
-    const currentUsdRateEl = document.getElementById('current-usd-rate');
+    const ratesContainerEl = document.getElementById('rates-container');
     const rateUpdateTimeEl = document.getElementById('rate-update-time');
     
     // Card fee rates (percentage)
@@ -29,13 +28,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Exchange rates (to KRW)
     let exchangeRates = {
         'JPY': 0,
-        'USD': 0
+        'USD': 0,
+        'TRY': 0
     };
     
     // Currency symbols
     const currencySymbols = {
         'JPY': '¥',
-        'USD': '$'
+        'USD': '$',
+        'TRY': '₺'
     };
     
     // Fetch exchange rates when the page loads
@@ -61,10 +62,35 @@ document.addEventListener('DOMContentLoaded', function() {
         return date.toLocaleString('ko-KR', options);
     }
     
+    // Function to update the current exchange rates display
+    function updateRatesDisplay() {
+        // Create a container for all rates
+        let ratesHTML = '';
+        
+        // Add each currency rate
+        if (exchangeRates.JPY > 0) {
+            ratesHTML += `<span class="rate-item">1 JPY = ${exchangeRates.JPY.toFixed(2)} 원</span> | `;
+        }
+        
+        if (exchangeRates.USD > 0) {
+            ratesHTML += `<span class="rate-item">1 USD = ${exchangeRates.USD.toFixed(2)} 원</span> | `;
+        }
+        
+        if (exchangeRates.TRY > 0) {
+            ratesHTML += `<span class="rate-item">1 TRY = ${exchangeRates.TRY.toFixed(2)} 원</span>`;
+        }
+        
+        // Replace the last pipe if it exists
+        ratesHTML = ratesHTML.replace(/\|\s*$/, '');
+        
+        // Update the rates display
+        ratesContainerEl.innerHTML = ratesHTML;
+    }
+    
     // Function to fetch exchange rates
     async function fetchExchangeRates() {
         try {
-            // Using ExchangeRate-API with base currency KRW to get rates for JPY and USD
+            // Using ExchangeRate-API with base currency KRW to get rates for JPY, USD, and TRY
             const response = await fetch('https://open.er-api.com/v6/latest/KRW');
             const data = await response.json();
             
@@ -72,13 +98,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Convert from KRW-based rates to the rates we need (KRW per currency unit)
                 if (data.rates.JPY) {
                     exchangeRates.JPY = 1 / data.rates.JPY;
-                    currentJpyRateEl.textContent = `1 JPY = ${exchangeRates.JPY.toFixed(2)} 원`;
                 }
                 
                 if (data.rates.USD) {
                     exchangeRates.USD = 1 / data.rates.USD;
-                    currentUsdRateEl.textContent = `1 USD = ${exchangeRates.USD.toFixed(2)} 원`;
                 }
+                
+                if (data.rates.TRY) {
+                    exchangeRates.TRY = 1 / data.rates.TRY;
+                }
+                
+                // Update the exchange rates display
+                updateRatesDisplay();
                 
                 // Update the exchange rate timestamp
                 const currentTime = new Date();
@@ -91,11 +122,13 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('환율 정보를 가져오는데 실패했습니다. 잠시 후 다시 시도해주세요.');
             
             // Fallback to recent average exchange rates
-            exchangeRates.JPY = 9.80; // 약 9.8원/엔 (2023년 기준)
+            exchangeRates.JPY = 9.80;  // 약 9.8원/엔 (2023년 기준)
             exchangeRates.USD = 1350;  // 약 1,350원/달러 (2023년 기준)
+            exchangeRates.TRY = 42;    // 약 42원/리라 (2023년 기준)
             
-            currentJpyRateEl.textContent = `1 JPY = ${exchangeRates.JPY.toFixed(2)} 원 (예상 환율)`;
-            currentUsdRateEl.textContent = `1 USD = ${exchangeRates.USD.toFixed(2)} 원 (예상 환율)`;
+            // Update with fallback rates
+            updateRatesDisplay();
+            
             rateUpdateTimeEl.textContent = "환율 정보 로드 실패";
         }
     }
